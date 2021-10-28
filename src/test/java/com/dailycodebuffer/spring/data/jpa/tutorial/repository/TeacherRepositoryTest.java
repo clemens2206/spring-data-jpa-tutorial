@@ -25,6 +25,7 @@ class TeacherRepositoryTest {
                 .credit(5)
                 .build();
 
+
         Course courseJava = Course.builder()
                 .titel("Java")
                 .credit(6)
