@@ -1,6 +1,7 @@
 package com.dailycodebuffer.spring.data.jpa.tutorial.repository;
 
 import com.dailycodebuffer.spring.data.jpa.tutorial.entity.Course;
+import com.dailycodebuffer.spring.data.jpa.tutorial.entity.Student;
 import com.dailycodebuffer.spring.data.jpa.tutorial.entity.Teacher;
 import net.bytebuddy.TypeCache;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
@@ -98,5 +99,30 @@ class CourseRepositoryTest {
                 "D", firstPageTenRecords).getContent();
 
         System.out.println("courses = " + courses);
+    }
+
+    @Test
+    public void saveCourseWithStudentAndTeacher(){
+
+        Teacher teacher = Teacher.builder()
+                .lastName("Scherl")
+                .firstName("Hansi")
+                .build();
+
+        Student student = Student.builder()
+                .firstName("Anna")
+                .lastName("Kerber")
+                .emailId("ankerber@tsn.at")
+                .build();
+
+        Course course = Course.builder()
+                .titel("Ai")
+                .credit(12)
+                .teacher(teacher)
+                .build();
+
+        course.addStudents(student);
+
+        courseRepository.save(course);
     }
 }
